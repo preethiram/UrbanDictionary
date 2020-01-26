@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">UrbanDictionary</string>
+    <string name="no_data_found">"Please enter the word you want to search"</string>
+    <string name="search_hint">"Please enter the word "</string>
+</resources>
