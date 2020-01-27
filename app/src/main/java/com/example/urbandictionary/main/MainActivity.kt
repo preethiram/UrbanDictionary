@@ -7,9 +7,12 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.urbandictionary.R
+import com.example.urbandictionary.di.ViewModelFactory
 import com.example.urbandictionary.model.DictionaryModel
 import com.jakewharton.rxbinding.widget.RxTextView
 import dagger.android.AndroidInjection
@@ -24,8 +27,11 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
+
     lateinit var mainViewModel: MainViewModel
+
+    @Inject
+    lateinit var viewModelFactory :  ViewModelFactory
 
     lateinit var linearLayoutManager: RecyclerView.LayoutManager
 
@@ -39,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // injecting activity
         AndroidInjection.inject(this)
+        mainViewModel = ViewModelProviders.of(this,viewModelFactory).get(MainViewModel::class.java)
 
         compositeSubscription = CompositeSubscription()
         addAdapter()
